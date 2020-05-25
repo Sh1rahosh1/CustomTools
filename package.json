@@ -1,0 +1,17 @@
+{
+    "name": "custom-tools",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "mocha",
+        "init": "tsc --init"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "mocha": "^7.2.0",
+        "typescript": "^3.9.3"
+    }
+}
