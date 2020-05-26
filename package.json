@@ -5,7 +5,8 @@
     "main": "index.js",
     "scripts": {
         "test": "mocha",
-        "init": "tsc --init"
+        "init": "tsc --init",
+        "build": "tsc"
     },
     "keywords": [],
     "author": "",
