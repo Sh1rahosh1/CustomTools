@@ -2,7 +2,7 @@
 
 import { expect } from "chai";
 
-import { testFun, isDeepEqual } from "../src/index";
+import { testFun, isDeepEqual, specialFlagRegExp } from "../src/index";
 import "mocha";
 
 
@@ -15,11 +15,17 @@ describe("Array", function () {
     it("should return test when call testFun", () => {
       expect(testFun()).equal("test");
     });
+
     it("should pending if two object is deepEqual", () => {
       const a = 1;
       const b = 1;
       const result = isDeepEqual(a, b)
       expect(result).equal(true);
     });
+
+    it('should return str between flags', () => {
+      const a = specialFlagRegExp('初音宇宙第一可爱', '初音', '可爱').targetSpecial
+      expect(a).equal('宇宙第一')
+    })
   });
 });
