@@ -18,8 +18,8 @@ describe("index", function () {
 
   describe("isDeepEqual function", () => {
     it("should pending if two object is deepEqual", () => {
-      const a = 1;
-      const b = 1;
+      const a = null;
+      const b = null;
       const result = isDeepEqual(a, b);
       expect(result).equal(true);
     });
