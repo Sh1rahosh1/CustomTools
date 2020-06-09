@@ -1,34 +1,43 @@
-import {logger} from './logger'
+import { logger } from "./logger";
 
 export const testFun = (): string => {
   return "test";
 };
 
 /**
- * @param obj1 对比参数1 
+ * @param obj1 对比参数1
  * @param obj2 对比参数2
- * 
+ *
  * isDeepEqual,参数类型允许为object，boolean,number,string,undefined，null(其实null就是object)
  * 不允许为bigint和symbol,因为暂时不清楚如何判断相等。
  */
 
-
 export function isDeepEqual<T>(obj1: T, obj2: T): boolean {
-
   let result = true;
+  // logger('isDeepEqual',obj1 as unknown as object);
+  // logger('isDeepEqual',obj2 as unknown as object);
 
   // boolean number string undefined null在这里判断结束
   // js很神奇，typeof null 是object，正常来说object是无法通过===来判断是否相等
   // 但是null就是他妈的可以
   if (obj1 === obj2) return true;
 
-  if (obj1 !== obj2 && typeof obj1 !=='object') return false;
+  if (obj1 !== obj2 && typeof obj1 !== "object") return false;
 
-
+  for (const key in obj1) {
+    const temp2 = (obj2 as unknown) as object;
+    if (!temp2.hasOwnProperty(key)) {
+      return false;
+    }
+  }
 
   // object 判断
   for (const key in obj2) {
-    result = result && isDeepEqual(obj1[key],obj2[key])
+    const temp1 = (obj1 as unknown) as object;
+    if (!temp1.hasOwnProperty(key)) {
+      return false;
+    }
+    result = result && isDeepEqual(obj1[key], obj2[key]);
   }
   return result;
 }

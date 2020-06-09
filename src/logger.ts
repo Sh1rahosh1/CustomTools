@@ -1,4 +1,4 @@
-export const logger = (functionName:string,content:string) => {
+export const logger = (functionName:string,content:string|object) => {
 
 
 
