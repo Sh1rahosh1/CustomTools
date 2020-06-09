@@ -15,37 +15,21 @@ export const testFun = (): string => {
 
 export function isDeepEqual<T>(obj1: T, obj2: T): boolean {
 
-  let result = false;
-
- 
+  let result = true;
 
   // boolean number string undefined null在这里判断结束
   // js很神奇，typeof null 是object，正常来说object是无法通过===来判断是否相等
   // 但是null就是他妈的可以
-  if (obj1 === obj2) return !result;
+  if (obj1 === obj2) return true;
 
- 
+  if (obj1 !== obj2 && typeof obj1 !=='object') return false;
+
 
 
   // object 判断
-  for (const key in obj1) {
-    const temp2 = (obj1 as unknown) as object;
-    if ( !temp2.hasOwnProperty(key)) {
-      return result;
-    }
-  }
   for (const key in obj2) {
-    const temp1 = (obj2 as unknown) as object;
-    if (!temp1.hasOwnProperty(key)) {
-      return result;
-    }
-
-    if (typeof obj1[key] !== typeof obj2[key]) {
-      return result;
-    }
-    result = isDeepEqual(obj1[key],obj2[key])
+    result = result && isDeepEqual(obj1[key],obj2[key])
   }
-
   return result;
 }
 

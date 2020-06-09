@@ -32,7 +32,7 @@ describe("index", function () {
     });
     it("should return false when given two different object only contains fundamental type", () => {
       const a = { a: "a", b: 1, c: undefined, d: false };
-      const b = { a: "a", b: 1, c: undefined, d: true };
+      const b = { a: "a", b: 2, c: undefined, d: false };
       const result = isDeepEqual(a, b);
       expect(result).equal(false);
     });
