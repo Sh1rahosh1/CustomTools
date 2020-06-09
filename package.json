@@ -6,7 +6,7 @@
     "scripts": {
         "test": "mocha test --require ts-node/register test/*.spec.ts",
         "init": "tsc --init",
-        "build":"tsc"
+        "build": "tsc"
     },
     "keywords": [],
     "author": "",
