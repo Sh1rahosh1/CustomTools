@@ -37,9 +37,9 @@ describe("index", function () {
       const result = isDeepEqual(b, c);
       expect(result).equal(false);
     });
-    it("should return true when given two same object contains Array", () => {
-      const a = { a: "a", b: 1, c: undefined, d: [true, "1", 1] };
-      const b = { a: "a", b: 1, c: undefined, d: [true, "1", 1] };
+    it("should return true when given two arrays", () => {
+      const a = [ 'a', 'b', 'c', 'd', 'e', 'f', 'g' ];
+      const b = [ 'a', 'b', 'c', 'd', 'e', 'f', 'g' ];
       const result = isDeepEqual(a, b);
       expect(result).equal(true);
     });

@@ -14,12 +14,11 @@ export const testFun = (): string => {
 
 export function isDeepEqual<T>(obj1: T, obj2: T): boolean {
   let result = true;
-  // logger('isDeepEqual',obj1 as unknown as object);
-  // logger('isDeepEqual',obj2 as unknown as object);
 
   // boolean number string undefined null在这里判断结束
   // js很神奇，typeof null 是object，正常来说object是无法通过===来判断是否相等
-  // 但是null就是他妈的可以
+  // 但是null是可以的
+  
   if (obj1 === obj2) return true;
 
   if (obj1 !== obj2 && typeof obj1 !== "object") return false;
