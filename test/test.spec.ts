@@ -2,7 +2,7 @@
 
 import { expect } from "chai";
 
-import { testFun, isDeepEqual, specialFlagRegExp } from "../src/index";
+import { testFun, isDeepEqual, specialFlagRegExp, deepCopy } from "../src/index";
 import "mocha";
 
 
@@ -62,5 +62,24 @@ describe("index", function () {
       const result = specialFlagRegExp("初音宇宙第一可爱", "初音", "可爱");
       expect(result.otherStr).equal("初音宇宙第一可爱");
     });
+  });
+
+  describe("deepCopy function", () => {
+    it("should return same object", () => {
+      const origin = {a:1,b:2,c:{d:'3',e:4}};
+      const result  = deepCopy(origin);
+      expect(origin).deep.equal(result);
+    });
+
+    it("should return same object when object contains array", () => {
+      const origin = {a:1,b:2,c:{d:'3',e:4},f:[5,6,'7']};
+      const result  = deepCopy(origin);
+      expect(origin).deep.equal(result);
+    });
+
+    // it("should return str with two flags", () => {
+    //   const result = specialFlagRegExp("初音宇宙第一可爱", "初音", "可爱");
+    //   expect(result.otherStr).equal("初音宇宙第一可爱");
+    // });
   });
 });

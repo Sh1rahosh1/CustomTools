@@ -72,3 +72,25 @@ export function specialFlagRegExp(
   }
   return result;
 }
+
+
+export function deepCopy(object:any){
+
+  let result:any = {};
+
+  if (typeof object !=="object") {
+    return;
+  }
+
+  for (const key in object) {
+    if (object.hasOwnProperty(key)) {
+      const element = object[key];
+        result[key] = typeof element ==='object' ? deepCopy(element): object[key];
+  
+      
+      
+    }
+  }
+  return result
+
+}
