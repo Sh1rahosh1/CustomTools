@@ -72,17 +72,23 @@ export function specialFlagRegExp(
   }
   return result;
 }
-
-export function deepCopy(object: {[x:string]:any}) {
-
+/**
+ * 深拷贝对象
+ * @param {[x:string]:any} object - 目标对象
+ *
+ * @returns {[x:string]:any}
+ *        类型一致的对象
+ *
+ */
+export function deepCopy(object: { [x: string]: any }): { [x: string]: any } {
   let result: { [x: string]: any } = {};
   let temp;
   switch (getBaseType(object)) {
     case ObjectType.REGEXP:
-       temp = object as RegExp;
-      return new RegExp(temp.source,temp.flags);
+      temp = object as RegExp;
+      return new RegExp(temp.source, temp.flags);
     case ObjectType.DATE:
-       temp = object as Date;
+      temp = object as Date;
       return new Date(temp.getTime());
     case ObjectType.ARRAY:
       result = [];
