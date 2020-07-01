@@ -18,7 +18,7 @@ export function isDeepEqual<T>(obj1: T, obj2: T): boolean {
   // boolean number string undefined null在这里判断结束
   // js很神奇，typeof null 是object，正常来说object是无法通过===来判断是否相等
   // 但是null是可以的
-  
+
   if (obj1 === obj2) return true;
 
   if (obj1 !== obj2 && typeof obj1 !== "object") return false;
@@ -73,21 +73,51 @@ export function specialFlagRegExp(
   return result;
 }
 
+export function deepCopy(object: {[x:string]:any}) {
 
-export function deepCopy(object:any){
-  if(typeof object !== 'object'){
-    return;
+  let result: { [x: string]: any } = {};
+  let temp;
+  switch (getBaseType(object)) {
+    case ObjectType.REGEXP:
+       temp = object as RegExp;
+      return new RegExp(temp.source,temp.flags);
+    case ObjectType.DATE:
+       temp = object as Date;
+      return new Date(temp.getTime());
+    case ObjectType.ARRAY:
+      result = [];
+      break;
+    default:
+      break;
   }
-
-  let result:{[x:string]:any} = Array.isArray(object) ? [] :{};
   for (const key in object) {
-    if (object.hasOwnProperty(key) && typeof object[key] ==='object') {
+    if (object.hasOwnProperty(key) && typeof object[key] === "object") {
       result[key] = deepCopy(object[key]);
-      
-    }else{
+    } else {
       result[key] = object[key];
     }
   }
 
   return result;
+}
+
+enum ObjectType {
+  NORMAL_OBJECT,
+  DATE,
+  ARRAY,
+  REGEXP,
+}
+
+function getBaseType(obj: object): ObjectType {
+  if (Object.prototype.toString.call(obj) === "[object Date]") {
+    return ObjectType.DATE;
+  }
+  if (Object.prototype.toString.call(obj) === "[object RegExp]") {
+    return ObjectType.REGEXP;
+  }
+  if (Array.isArray(obj)) {
+    return ObjectType.ARRAY;
+  }
+
+  return ObjectType.NORMAL_OBJECT;
 }
