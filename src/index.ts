@@ -75,22 +75,19 @@ export function specialFlagRegExp(
 
 
 export function deepCopy(object:any){
-
-  let result:any = {};
-
-  if (typeof object !=="object") {
+  if(typeof object !== 'object'){
     return;
   }
 
+  let result:{[x:string]:any} = Array.isArray(object) ? [] :{};
   for (const key in object) {
-    if (object.hasOwnProperty(key)) {
-      const element = object[key];
-        result[key] = typeof element ==='object' ? deepCopy(element): object[key];
-  
+    if (object.hasOwnProperty(key) && typeof object[key] ==='object') {
+      result[key] = deepCopy(object[key]);
       
-      
+    }else{
+      result[key] = object[key];
     }
   }
-  return result
 
+  return result;
 }
